@@ -1,0 +1,287 @@
+{
+ "cases": [
+  {
+   "name": "flat",
+   "series": {
+    "account": "0x00000000000000000000000000000000000000a1",
+    "samples": [
+     {
+      "equity_e8": 10000000000,
+      "flow_e8": 0,
+      "l1_block": 1000,
+      "ts_ms": 1795000000000
+     },
+     {
+      "equity_e8": 10000000000,
+      "flow_e8": 0,
+      "l1_block": 1010,
+      "ts_ms": 1795000060000
+     }
+    ],
+    "v": "talents.equity/1",
+    "venue": "hl-testnet"
+   },
+   "stats": {
+    "down_periods": 0,
+    "end_equity_e8": 10000000000,
+    "first_block": 1000,
+    "index_e8": 100000000,
+    "last_block": 1010,
+    "max_drawdown_bps": 0,
+    "net_flow_e8": 0,
+    "periods": 1,
+    "series": "sha256:0e1917dda0efecac6975a3afda0c0fbfa7ba7822b023b9df1762a75f4d6b94b7",
+    "total_return_bps": 0,
+    "up_periods": 0,
+    "v": "talents.equity-stats/1"
+   }
+  },
+  {
+   "name": "gain-then-drawdown",
+   "series": {
+    "account": "0x00000000000000000000000000000000000000a1",
+    "samples": [
+     {
+      "equity_e8": 10000000000,
+      "flow_e8": 0,
+      "l1_block": 1000,
+      "ts_ms": 1795000000000
+     },
+     {
+      "equity_e8": 12000000000,
+      "flow_e8": 0,
+      "l1_block": 1010,
+      "ts_ms": 1795000060000
+     },
+     {
+      "equity_e8": 9000000000,
+      "flow_e8": 0,
+      "l1_block": 1020,
+      "ts_ms": 1795000120000
+     },
+     {
+      "equity_e8": 9900000000,
+      "flow_e8": 0,
+      "l1_block": 1030,
+      "ts_ms": 1795000180000
+     }
+    ],
+    "v": "talents.equity/1",
+    "venue": "hl-testnet"
+   },
+   "stats": {
+    "down_periods": 1,
+    "end_equity_e8": 9900000000,
+    "first_block": 1000,
+    "index_e8": 99000000,
+    "last_block": 1030,
+    "max_drawdown_bps": 2500,
+    "net_flow_e8": 0,
+    "periods": 3,
+    "series": "sha256:6d9006d7a1fca8644a34398fe531831fb3abb5a8e97bcf53985630979c62cbaf",
+    "total_return_bps": -100,
+    "up_periods": 2,
+    "v": "talents.equity-stats/1"
+   }
+  },
+  {
+   "name": "deposit-is-not-return",
+   "series": {
+    "account": "0x00000000000000000000000000000000000000a1",
+    "samples": [
+     {
+      "equity_e8": 10000000000,
+      "flow_e8": 0,
+      "l1_block": 1000,
+      "ts_ms": 1795000000000
+     },
+     {
+      "equity_e8": 15000000000,
+      "flow_e8": 5000000000,
+      "l1_block": 1010,
+      "ts_ms": 1795000060000
+     },
+     {
+      "equity_e8": 16500000000,
+      "flow_e8": 0,
+      "l1_block": 1020,
+      "ts_ms": 1795000120000
+     }
+    ],
+    "v": "talents.equity/1",
+    "venue": "hl-testnet"
+   },
+   "stats": {
+    "down_periods": 0,
+    "end_equity_e8": 16500000000,
+    "first_block": 1000,
+    "index_e8": 110000000,
+    "last_block": 1020,
+    "max_drawdown_bps": 0,
+    "net_flow_e8": 5000000000,
+    "periods": 2,
+    "series": "sha256:df808228afdece8b47cf8fe94d294ce328188a6305ada33eea7eff2556935b8a",
+    "total_return_bps": 1000,
+    "up_periods": 1,
+    "v": "talents.equity-stats/1"
+   }
+  },
+  {
+   "name": "withdrawal-is-not-loss",
+   "series": {
+    "account": "0x00000000000000000000000000000000000000a1",
+    "samples": [
+     {
+      "equity_e8": 10000000000,
+      "flow_e8": 0,
+      "l1_block": 1000,
+      "ts_ms": 1795000000000
+     },
+     {
+      "equity_e8": 6000000000,
+      "flow_e8": -5000000000,
+      "l1_block": 1010,
+      "ts_ms": 1795000060000
+     },
+     {
+      "equity_e8": 6600000000,
+      "flow_e8": 0,
+      "l1_block": 1020,
+      "ts_ms": 1795000120000
+     }
+    ],
+    "v": "talents.equity/1",
+    "venue": "hl-testnet"
+   },
+   "stats": {
+    "down_periods": 0,
+    "end_equity_e8": 6600000000,
+    "first_block": 1000,
+    "index_e8": 121000000,
+    "last_block": 1020,
+    "max_drawdown_bps": 0,
+    "net_flow_e8": -5000000000,
+    "periods": 2,
+    "series": "sha256:b0f16511b340141322f8515ed0900db27a1cecc7cf4905b0c06ecc3a4a0b4a61",
+    "total_return_bps": 2100,
+    "up_periods": 2,
+    "v": "talents.equity-stats/1"
+   }
+  },
+  {
+   "name": "small-loss-truncates-toward-zero",
+   "series": {
+    "account": "0x00000000000000000000000000000000000000a1",
+    "samples": [
+     {
+      "equity_e8": 300000000,
+      "flow_e8": 0,
+      "l1_block": 1000,
+      "ts_ms": 1795000000000
+     },
+     {
+      "equity_e8": 299999999,
+      "flow_e8": 0,
+      "l1_block": 1010,
+      "ts_ms": 1795000060000
+     }
+    ],
+    "v": "talents.equity/1",
+    "venue": "hl-testnet"
+   },
+   "stats": {
+    "down_periods": 1,
+    "end_equity_e8": 299999999,
+    "first_block": 1000,
+    "index_e8": 99999999,
+    "last_block": 1010,
+    "max_drawdown_bps": 0,
+    "net_flow_e8": 0,
+    "periods": 1,
+    "series": "sha256:07d8f5868bc0d28a53615f0e0d57ae42b8e023cfb46ec35696763615fbbb39e8",
+    "total_return_bps": 0,
+    "up_periods": 0,
+    "v": "talents.equity-stats/1"
+   }
+  },
+  {
+   "name": "zero-then-funded",
+   "series": {
+    "account": "0x00000000000000000000000000000000000000a1",
+    "samples": [
+     {
+      "equity_e8": 0,
+      "flow_e8": 0,
+      "l1_block": 1000,
+      "ts_ms": 1795000000000
+     },
+     {
+      "equity_e8": 1000000000,
+      "flow_e8": 1000000000,
+      "l1_block": 1010,
+      "ts_ms": 1795000060000
+     },
+     {
+      "equity_e8": 1100000000,
+      "flow_e8": 0,
+      "l1_block": 1020,
+      "ts_ms": 1795000120000
+     }
+    ],
+    "v": "talents.equity/1",
+    "venue": "hl-testnet"
+   },
+   "stats": {
+    "down_periods": 0,
+    "end_equity_e8": 1100000000,
+    "first_block": 1000,
+    "index_e8": 110000000,
+    "last_block": 1020,
+    "max_drawdown_bps": 0,
+    "net_flow_e8": 1000000000,
+    "periods": 2,
+    "series": "sha256:f7268f99b0385a4604136092c345ec5f8e58fb6d3e50374d17d73b400e1bcdb9",
+    "total_return_bps": 1000,
+    "up_periods": 1,
+    "v": "talents.equity-stats/1"
+   }
+  },
+  {
+   "name": "liquidated",
+   "series": {
+    "account": "0x00000000000000000000000000000000000000a1",
+    "samples": [
+     {
+      "equity_e8": 1000000000,
+      "flow_e8": 0,
+      "l1_block": 1000,
+      "ts_ms": 1795000000000
+     },
+     {
+      "equity_e8": 0,
+      "flow_e8": 0,
+      "l1_block": 1010,
+      "ts_ms": 1795000060000
+     }
+    ],
+    "v": "talents.equity/1",
+    "venue": "hl-testnet"
+   },
+   "stats": {
+    "down_periods": 1,
+    "end_equity_e8": 0,
+    "first_block": 1000,
+    "index_e8": 0,
+    "last_block": 1010,
+    "max_drawdown_bps": 10000,
+    "net_flow_e8": 0,
+    "periods": 1,
+    "series": "sha256:472e48a73d0687e9646cce5cb7bd4ed0fe94f91f8a1a709687670d45c298ad1b",
+    "total_return_bps": -10000,
+    "up_periods": 0,
+    "v": "talents.equity-stats/1"
+   }
+  }
+ ],
+ "v": "talents.equity-vectors/1"
+}

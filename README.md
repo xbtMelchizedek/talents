@@ -21,6 +21,7 @@ Design: [docs/DESIGN.md](docs/DESIGN.md) (facts verified against official docs o
 | `talents/mandate.py` | The pre-sign policy engine: HL perps, HIP-4 outcomes, pump.fun buy/sell (never create), swaps. Refuses mainnet networks. | `tests/test_mandate.py` |
 | `talents/hl.py` + `python -m talents preflight` | Testnet-pinned info client, order wire builder (SDK shape), tick/lot rules and builder-fee caps from the docs, preflight against the live testnet mark. Prints the **unsigned** action. | `tests/test_hl.py` (live read-only test behind `TALENTS_LIVE_TESTNET=1`) |
 | `talents/callout.py` | Commit-reveal signed callouts (did:key Ed25519) and an integer-only track record (hidden commits count as losses) that an SP1 program can reproduce. | `vectors/callout-v1.json` golden vectors |
+| `talents/equity.py` | Integer-only time-weighted return and max drawdown over an (L1 block, equity, flow) series, plus a sha256 series commitment: the reference for the planned SP1 PnL proof (verify on HyperEVM or natively on FLOP via Proof Court). Deposits and withdrawals are not returns. Pure, reads no chain. | `vectors/equity-v1.json` golden vectors |
 | `talents/flopsim.py`, `talents/swap.py` | Simulated FLOP hash escrow (pinned to pearl-diver's scenarios) and a swap coordinator; end-to-end on anvil. | `tests/test_swap_anvil.py` |
 
 ## Run it
