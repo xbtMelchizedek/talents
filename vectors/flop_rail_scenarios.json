@@ -1,0 +1,9 @@
+[
+  {"name": "happy", "steps": [{"op":"lock","at":0},{"op":"verify","at":1},{"op":"claim","at":2,"secret":"good"},{"op":"verify","at":3},{"op":"refund","at":2000}]},
+  {"name": "wrong-preimage", "steps": [{"op":"lock","at":0},{"op":"claim","at":1,"secret":"bad"},{"op":"claim","at":2,"secret":"short"},{"op":"claim","at":3,"secret":"good"}]},
+  {"name": "uppercase-hex-preimage", "steps": [{"op":"lock","at":0},{"op":"claim","at":1,"secret":"upper"}]},
+  {"name": "refund-timing", "steps": [{"op":"lock","at":0},{"op":"refund","at":999},{"op":"claim","at":1000,"secret":"good"},{"op":"refund","at":1000},{"op":"refund","at":1001}]},
+  {"name": "late-lock", "steps": [{"op":"lock","at":1000},{"op":"lock","at":999},{"op":"lock","at":999}]},
+  {"name": "verify-mutated", "steps": [{"op":"lock","at":0},{"op":"verify","at":1,"mut":true}]},
+  {"name": "claim-after-claimby-before-refund", "steps": [{"op":"lock","at":0},{"op":"claim","at":700,"secret":"good"}]}
+]

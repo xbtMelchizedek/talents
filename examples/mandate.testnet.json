@@ -1,0 +1,12 @@
+{
+  "agent": "did:key:z6MkmNL6xksdEJENGk9Z1qqGsY5njKQdjU1UhnUEUvWyQUVX",
+  "network": "hl-testnet",
+  "venues": ["hl-perp", "hl-outcome", "htlc-swap"],
+  "expires_ms": 1800000000000,
+  "per_order_usd": "250",
+  "daily_usd": "1000",
+  "max_leverage": 3,
+  "hl_assets": ["BTC", "ETH", "SOL"],
+  "max_px_deviation_bps": 200,
+  "swap_max_usd": "100"
+}

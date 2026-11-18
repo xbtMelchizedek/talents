@@ -1,0 +1,368 @@
+{
+ "v": "talents.callout-vectors/1",
+ "note": "PUBLIC test keys. score() must reproduce `record` exactly.",
+ "cases": [
+  {
+   "name": "two-wins-one-loss",
+   "agent": "did:key:z6MkmNL6xksdEJENGk9Z1qqGsY5njKQdjU1UhnUEUvWyQUVX",
+   "now_ms": 1796000000000,
+   "commits": [
+    {
+     "v": "talents.commit/1",
+     "agent": "did:key:z6MkmNL6xksdEJENGk9Z1qqGsY5njKQdjU1UhnUEUvWyQUVX",
+     "commit": "sha256:8c8e95ccff838b9cefc5945e1e1c62de2b73d6c1ed09262e1651b6a49f052045",
+     "ts_ms": 1795000000001,
+     "sig": "57b14f06f22ad8394075ae6f01b12af14091a664a959e4e9bf459d46f55af148395680289aa393d5aa11f531b2445b08c954ec5daf040d4ec6f03ed804eb0d06"
+    },
+    {
+     "v": "talents.commit/1",
+     "agent": "did:key:z6MkmNL6xksdEJENGk9Z1qqGsY5njKQdjU1UhnUEUvWyQUVX",
+     "commit": "sha256:d79fc2e65d198cf22fa1652a4ae77381b2dc6c986bbc9fed5254d87c0077bcf4",
+     "ts_ms": 1795000001001,
+     "sig": "b3cb6252405b15c80c2eb0f66455dd04e5766ab4f95c24fc4ed89d72dee9ee80e3b4ccd5f09bfeb2fa2acf6f186c13452035af4d33f6690a47210cac86e13c03"
+    },
+    {
+     "v": "talents.commit/1",
+     "agent": "did:key:z6MkmNL6xksdEJENGk9Z1qqGsY5njKQdjU1UhnUEUvWyQUVX",
+     "commit": "sha256:dd1ba489b3a04b0df6cd46fb85eff7df3f2a3c9216d745402c20e7f3f5eeb07a",
+     "ts_ms": 1795000002001,
+     "sig": "cb1b481d401465e8d1a904e86b24a65b668906371276279b1456c19fb49daf3f313fccb35aed985f7f24f767d6793c8981f0755bd1828ee489386352b6fd7c05"
+    }
+   ],
+   "reveals": [
+    {
+     "v": "talents.reveal/1",
+     "call": {
+      "v": "talents.callout/1",
+      "agent": "did:key:z6MkmNL6xksdEJENGk9Z1qqGsY5njKQdjU1UhnUEUvWyQUVX",
+      "venue": "hl-perp",
+      "market": "BTC",
+      "side": "long",
+      "entry_px": "100",
+      "invalidation_px": "95",
+      "horizon_ms": 3600000,
+      "size_bucket": "s",
+      "ts_ms": 1795000000000,
+      "nonce": "00"
+     },
+     "salt": "0101010101010101010101010101010101010101010101010101010101010101",
+     "commit": "sha256:8c8e95ccff838b9cefc5945e1e1c62de2b73d6c1ed09262e1651b6a49f052045",
+     "sig": "d3dd05733219af01975fa7af98e371711db7350d12ace473117c9450e26ef44a0d106d3df9ec42d17e90ae6da75ec6e22da3e6ba71ffca53b97ab6b2d03f2f0a"
+    },
+    {
+     "v": "talents.reveal/1",
+     "call": {
+      "v": "talents.callout/1",
+      "agent": "did:key:z6MkmNL6xksdEJENGk9Z1qqGsY5njKQdjU1UhnUEUvWyQUVX",
+      "venue": "hl-perp",
+      "market": "BTC",
+      "side": "short",
+      "entry_px": "50",
+      "invalidation_px": "55",
+      "horizon_ms": 3600000,
+      "size_bucket": "s",
+      "ts_ms": 1795000001000,
+      "nonce": "01"
+     },
+     "salt": "0202020202020202020202020202020202020202020202020202020202020202",
+     "commit": "sha256:d79fc2e65d198cf22fa1652a4ae77381b2dc6c986bbc9fed5254d87c0077bcf4",
+     "sig": "c86850726c50f68b55d2c27c4ebd1af30fc6ec59fb4f1c2440954057a01b7214ba77cab45f267af58d1653c6488fd136fcce9b68133f7f34f7a5ee0ec099ae07"
+    },
+    {
+     "v": "talents.reveal/1",
+     "call": {
+      "v": "talents.callout/1",
+      "agent": "did:key:z6MkmNL6xksdEJENGk9Z1qqGsY5njKQdjU1UhnUEUvWyQUVX",
+      "venue": "hl-perp",
+      "market": "BTC",
+      "side": "long",
+      "entry_px": "100",
+      "invalidation_px": "90",
+      "horizon_ms": 3600000,
+      "size_bucket": "s",
+      "ts_ms": 1795000002000,
+      "nonce": "02"
+     },
+     "salt": "0303030303030303030303030303030303030303030303030303030303030303",
+     "commit": "sha256:dd1ba489b3a04b0df6cd46fb85eff7df3f2a3c9216d745402c20e7f3f5eeb07a",
+     "sig": "1b452c3109a30fcc400d99d15f46e6ab3e06e9ccabc81e588a1768dd946da4f5bb6bbd301b4112dd8673c1840b18c5af54e4af856cc969fc31fd3bfacf8a0809"
+    }
+   ],
+   "exits": [
+    {
+     "v": "talents.exit/1",
+     "agent": "did:key:z6MkmNL6xksdEJENGk9Z1qqGsY5njKQdjU1UhnUEUvWyQUVX",
+     "call": "sha256:ae5c7b772aa1120aa1b8e9be6a0ced0eaef12cc8c62a5fee9f23c3dacbd4f81e",
+     "exit_px": "110",
+     "ts_ms": 1795000000500,
+     "sig": "90e8a4bf44bd2abdf8d7a30bc921057914234094cc061797ae461f9ece2967b9b81d0b163db85645d7f9cd1bb58b2d816f2ae11b65fe26f2bf77bc80850b7b07"
+    },
+    {
+     "v": "talents.exit/1",
+     "agent": "did:key:z6MkmNL6xksdEJENGk9Z1qqGsY5njKQdjU1UhnUEUvWyQUVX",
+     "call": "sha256:b5b3d3296e9f2bbe700f8eb884a990354da67dfa021c5cc6395abd6324f4b945",
+     "exit_px": "45",
+     "ts_ms": 1795000001500,
+     "sig": "3b42e33270af11e2973d6610e49bb6fbd941bc330360ed4d58243e37ae927633c89dadfddc82ef306c3f1767d527295e9e655c7b07c86be010467d5d33587901"
+    },
+    {
+     "v": "talents.exit/1",
+     "agent": "did:key:z6MkmNL6xksdEJENGk9Z1qqGsY5njKQdjU1UhnUEUvWyQUVX",
+     "call": "sha256:a3af5b1e1a3129376a43d68f20ce55256c0681193749a021821c06f26023da36",
+     "exit_px": "93",
+     "ts_ms": 1795000002500,
+     "sig": "50d05bed1fce4f0a19e4d67871769e117d65f22609e9380f1d2753621ac6179a7680a30ded18d451203ec1dd26d02352dfce4dd40aca0a89761edcccaa626d0c"
+    }
+   ],
+   "record": {
+    "agent": "did:key:z6MkmNL6xksdEJENGk9Z1qqGsY5njKQdjU1UhnUEUvWyQUVX",
+    "calls": 3,
+    "closed": 3,
+    "wins": 2,
+    "sum_bps": 1300,
+    "max_drawdown_bps": 700,
+    "hidden": 0,
+    "rejected": []
+   }
+  },
+  {
+   "name": "open-position-not-scored",
+   "agent": "did:key:z6MkfDSNRs2i9S6LZ5vd4RbpZ6754H7R3btDqRTeHhamqvuJ",
+   "now_ms": 1796000000000,
+   "commits": [
+    {
+     "v": "talents.commit/1",
+     "agent": "did:key:z6MkfDSNRs2i9S6LZ5vd4RbpZ6754H7R3btDqRTeHhamqvuJ",
+     "commit": "sha256:0c970f5328921edc6b4b13f1331dfdfc07bc865bce0e83297e7c3d0b7b0b61be",
+     "ts_ms": 1795000000001,
+     "sig": "e8e3611c50426a60323f29f84ab59dbd9cd5170b53335bdeba87df67663f3d9ae0c15ece4ea914b936cbc79ebd6a24021a70b70b43bd6aa9cc788d3dfbdde308"
+    },
+    {
+     "v": "talents.commit/1",
+     "agent": "did:key:z6MkfDSNRs2i9S6LZ5vd4RbpZ6754H7R3btDqRTeHhamqvuJ",
+     "commit": "sha256:e5bd4ded6e5421006a4af954121d5646deb76d22c49ae97d0f5a0f304580ed30",
+     "ts_ms": 1795000001001,
+     "sig": "e1c4560e929ac7bb5f321fcf5e02c5d987b79af5fc4e2f4ae67dee93c109409eb194518c41d8422be8f766d1690ea3f5745a51bc34321235632aa9aa236a990e"
+    }
+   ],
+   "reveals": [
+    {
+     "v": "talents.reveal/1",
+     "call": {
+      "v": "talents.callout/1",
+      "agent": "did:key:z6MkfDSNRs2i9S6LZ5vd4RbpZ6754H7R3btDqRTeHhamqvuJ",
+      "venue": "hl-perp",
+      "market": "BTC",
+      "side": "long",
+      "entry_px": "100",
+      "invalidation_px": "95",
+      "horizon_ms": 3600000,
+      "size_bucket": "s",
+      "ts_ms": 1795000000000,
+      "nonce": "00"
+     },
+     "salt": "0101010101010101010101010101010101010101010101010101010101010101",
+     "commit": "sha256:0c970f5328921edc6b4b13f1331dfdfc07bc865bce0e83297e7c3d0b7b0b61be",
+     "sig": "7a5023040b886ed62d22f2b7f23501d2dd1dbfc742565a9f9cc2bd49b2321753f5732696216dca72edb9f1d54cbbabd700e455bd3b1d69b79b3e86381dc6130c"
+    },
+    {
+     "v": "talents.reveal/1",
+     "call": {
+      "v": "talents.callout/1",
+      "agent": "did:key:z6MkfDSNRs2i9S6LZ5vd4RbpZ6754H7R3btDqRTeHhamqvuJ",
+      "venue": "hl-perp",
+      "market": "BTC",
+      "side": "yes",
+      "entry_px": "0.40",
+      "invalidation_px": "0.30",
+      "horizon_ms": 3600000,
+      "size_bucket": "s",
+      "ts_ms": 1795000001000,
+      "nonce": "01"
+     },
+     "salt": "0202020202020202020202020202020202020202020202020202020202020202",
+     "commit": "sha256:e5bd4ded6e5421006a4af954121d5646deb76d22c49ae97d0f5a0f304580ed30",
+     "sig": "d02e5373011f0af8baec189302a89146982288a61ae47b2530ad89a3830c385d782997dcc5beb3cf9e2bdb2334dfe24e102735a29f0d5a151ab3e12d3ac8d603"
+    }
+   ],
+   "exits": [
+    {
+     "v": "talents.exit/1",
+     "agent": "did:key:z6MkfDSNRs2i9S6LZ5vd4RbpZ6754H7R3btDqRTeHhamqvuJ",
+     "call": "sha256:f5f1eaeaffbaaa4e34bcdb988b5e172abac42276086ac0b91f96b136d00f28e2",
+     "exit_px": "0.55",
+     "ts_ms": 1795000001500,
+     "sig": "eab279728877e08a4ab70eea574c2a5c9d6469711d283e7ccc5a5cd7295af81a8b84ce1e71ff94a01c5382a2565588e263ca2e061aa35f801050ca81bb7e5509"
+    }
+   ],
+   "record": {
+    "agent": "did:key:z6MkfDSNRs2i9S6LZ5vd4RbpZ6754H7R3btDqRTeHhamqvuJ",
+    "calls": 2,
+    "closed": 1,
+    "wins": 1,
+    "sum_bps": 3750,
+    "max_drawdown_bps": 0,
+    "hidden": 0,
+    "rejected": []
+   }
+  },
+  {
+   "name": "hidden-loser-penalized",
+   "agent": "did:key:z6MkpFkurpyZgyna5SAfLpvdzp7W6cvdc1fn9YECrwv3AMbF",
+   "now_ms": 1796000000000,
+   "commits": [
+    {
+     "v": "talents.commit/1",
+     "agent": "did:key:z6MkpFkurpyZgyna5SAfLpvdzp7W6cvdc1fn9YECrwv3AMbF",
+     "commit": "sha256:96a46d09267752367237ffe07dd346ccdc763300362b5150f57e81f5ea453232",
+     "ts_ms": 1795000000001,
+     "sig": "463d9335fa015a880ed2e9f715da93603dc462f24ec846d5d8ba04619545c31fa1326e01f119e8aadbf520a08053ca173942ca17bd280ece9019049af1d8e30c"
+    },
+    {
+     "v": "talents.commit/1",
+     "agent": "did:key:z6MkpFkurpyZgyna5SAfLpvdzp7W6cvdc1fn9YECrwv3AMbF",
+     "commit": "sha256:db3dace5f0143fc6206e1be6b1ecd71b0e65be9856a9d94586565d521f90045a",
+     "ts_ms": 1795000900001,
+     "sig": "15e6950eb984fa0144f927860149c316b3f4a53dfbc4f45b73c4cb7895354df7c3c853d232108c70e734bd2fe31847d240222eab65680b421d840a7ccb8b5708"
+    },
+    {
+     "v": "talents.commit/1",
+     "agent": "did:key:z6MkpFkurpyZgyna5SAfLpvdzp7W6cvdc1fn9YECrwv3AMbF",
+     "commit": "sha256:b5165a53f45910108bdce015ba03d1db60a02ecafd37e2a1279c428255a6e1f7",
+     "ts_ms": 1795000900002,
+     "sig": "3552974e56c067d09003ac9f66397d88640777738883b7e407e395d362c4c1db42a46f640d8426cb4cfbd0c210a87abae8e9562c7655eecc43b81b9a6de4cb02"
+    }
+   ],
+   "reveals": [
+    {
+     "v": "talents.reveal/1",
+     "call": {
+      "v": "talents.callout/1",
+      "agent": "did:key:z6MkpFkurpyZgyna5SAfLpvdzp7W6cvdc1fn9YECrwv3AMbF",
+      "venue": "hl-perp",
+      "market": "BTC",
+      "side": "long",
+      "entry_px": "64000",
+      "invalidation_px": "62000",
+      "horizon_ms": 3600000,
+      "size_bucket": "s",
+      "ts_ms": 1795000000000,
+      "nonce": "00"
+     },
+     "salt": "0101010101010101010101010101010101010101010101010101010101010101",
+     "commit": "sha256:96a46d09267752367237ffe07dd346ccdc763300362b5150f57e81f5ea453232",
+     "sig": "86a2d92d5520918bb49a1923b762472708c14e48a1234fa4518190eee4edcb67990be2a1d70d37b25a130e4695e60c819fada237cf2e9b365f741a3ebe91090a"
+    }
+   ],
+   "exits": [
+    {
+     "v": "talents.exit/1",
+     "agent": "did:key:z6MkpFkurpyZgyna5SAfLpvdzp7W6cvdc1fn9YECrwv3AMbF",
+     "call": "sha256:b930fad52f8c6dc37906eeb349151ee33fd16caf110ab962f772470a7be6ffeb",
+     "exit_px": "64640",
+     "ts_ms": 1795000000500,
+     "sig": "b255106790c6148263342fb36ffc0007f130ae77b00c5b324698956cf6b629d3957262bfd7ea80b004b913b668cac347a6e36c72267b6c6091c89235f1116206"
+    }
+   ],
+   "record": {
+    "agent": "did:key:z6MkpFkurpyZgyna5SAfLpvdzp7W6cvdc1fn9YECrwv3AMbF",
+    "calls": 1,
+    "closed": 1,
+    "wins": 1,
+    "sum_bps": 100,
+    "max_drawdown_bps": 2000,
+    "hidden": 2,
+    "rejected": []
+   }
+  },
+  {
+   "name": "rounding-toward-zero",
+   "agent": "did:key:z6MkfFqsFhzZaoXFvWm9Uq8DbhGjLHg2EAohwBtpGuApW6eX",
+   "now_ms": 1796000000000,
+   "commits": [
+    {
+     "v": "talents.commit/1",
+     "agent": "did:key:z6MkfFqsFhzZaoXFvWm9Uq8DbhGjLHg2EAohwBtpGuApW6eX",
+     "commit": "sha256:a4fe5bd9903b27cf3e59b2400eae6d1486921d476801b2aee4146725c5c41b15",
+     "ts_ms": 1795000000001,
+     "sig": "cdc6600f1d851e35667653fd0f69eff0844cab3fcba47dc4369a65261e9472d058c9274791578c900ac9c66abf8db718bf9fcd4a281e3217307a1a6cec231303"
+    },
+    {
+     "v": "talents.commit/1",
+     "agent": "did:key:z6MkfFqsFhzZaoXFvWm9Uq8DbhGjLHg2EAohwBtpGuApW6eX",
+     "commit": "sha256:e10754983f8806c1dfb944f85315522151be2942dc1d47b5a6bcdb52c5a48776",
+     "ts_ms": 1795000001001,
+     "sig": "68b18e3981a15c4d56205b85e3d752fe7fe02fc40b863d85099ce8d5d238e553dcf2985899702aaa9e3ab4038a1ae6df7448b20f2177f4883acb089cee090e0a"
+    }
+   ],
+   "reveals": [
+    {
+     "v": "talents.reveal/1",
+     "call": {
+      "v": "talents.callout/1",
+      "agent": "did:key:z6MkfFqsFhzZaoXFvWm9Uq8DbhGjLHg2EAohwBtpGuApW6eX",
+      "venue": "hl-perp",
+      "market": "BTC",
+      "side": "long",
+      "entry_px": "3",
+      "invalidation_px": "2",
+      "horizon_ms": 3600000,
+      "size_bucket": "s",
+      "ts_ms": 1795000000000,
+      "nonce": "00"
+     },
+     "salt": "0101010101010101010101010101010101010101010101010101010101010101",
+     "commit": "sha256:a4fe5bd9903b27cf3e59b2400eae6d1486921d476801b2aee4146725c5c41b15",
+     "sig": "6485bdcd04debcd98b7b2c6661b61f616803665a7ea626a4aed7ccb38e97814d37e033ee99f82daa4b3ccc314c1649d5d61089b9c890145db2286b33f99a710e"
+    },
+    {
+     "v": "talents.reveal/1",
+     "call": {
+      "v": "talents.callout/1",
+      "agent": "did:key:z6MkfFqsFhzZaoXFvWm9Uq8DbhGjLHg2EAohwBtpGuApW6eX",
+      "venue": "hl-perp",
+      "market": "BTC",
+      "side": "short",
+      "entry_px": "3",
+      "invalidation_px": "4",
+      "horizon_ms": 3600000,
+      "size_bucket": "s",
+      "ts_ms": 1795000001000,
+      "nonce": "01"
+     },
+     "salt": "0202020202020202020202020202020202020202020202020202020202020202",
+     "commit": "sha256:e10754983f8806c1dfb944f85315522151be2942dc1d47b5a6bcdb52c5a48776",
+     "sig": "04377d388fb1b885d9c47c1b62e0be6fc3ffedd546ed2817e12daf6f258b48d7beaf6bd5f0e8a549fd98a26c69df46d306db211331addccd82971b2e195aaa04"
+    }
+   ],
+   "exits": [
+    {
+     "v": "talents.exit/1",
+     "agent": "did:key:z6MkfFqsFhzZaoXFvWm9Uq8DbhGjLHg2EAohwBtpGuApW6eX",
+     "call": "sha256:f8a31a404090564c30fbc2da391fbf7f1a5eeef4025d094117a26fcc10824e94",
+     "exit_px": "2",
+     "ts_ms": 1795000000500,
+     "sig": "04ac7a91f367ceaed0244552b74d6b2f1d1fcca9cad9c5bc9f20727bbdeb1f8539bab666d48de61d133b397839d52addd3f2800b126239ddb547f99ac6a0a701"
+    },
+    {
+     "v": "talents.exit/1",
+     "agent": "did:key:z6MkfFqsFhzZaoXFvWm9Uq8DbhGjLHg2EAohwBtpGuApW6eX",
+     "call": "sha256:ef1643344a193e3ba2e17cb456f84fa56d09ef2afa1100f060da03999388210e",
+     "exit_px": "2",
+     "ts_ms": 1795000001500,
+     "sig": "13f76a83bc27fc25a753e8e7f0a0278a10bbb9dccab5f8cb42bdb47382a2ff0ab1aa7fe5a94ca672876b2c8881b1e6b1e7d047a32b3406a2f823f758e7afda0f"
+    }
+   ],
+   "record": {
+    "agent": "did:key:z6MkfFqsFhzZaoXFvWm9Uq8DbhGjLHg2EAohwBtpGuApW6eX",
+    "calls": 2,
+    "closed": 2,
+    "wins": 1,
+    "sum_bps": 0,
+    "max_drawdown_bps": 3333,
+    "hidden": 0,
+    "rejected": []
+   }
+  }
+ ]
+}

@@ -1,0 +1,7 @@
+{
+ "url": "https://api.hyperliquid-testnet.xyz/info",
+ "request": {
+  "type": "metaAndAssetCtxs"
+ },
+ "read_at": "2026-11-18T13:57:03.725821+00:00"
+}

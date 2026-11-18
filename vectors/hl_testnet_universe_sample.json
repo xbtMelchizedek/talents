@@ -1,0 +1,23 @@
+{
+ "BTC": {
+  "asset": 3,
+  "szDecimals": 5,
+  "maxLeverage": 40,
+  "markPx": "63104.0",
+  "oraclePx": "63960.8"
+ },
+ "ETH": {
+  "asset": 4,
+  "szDecimals": 4,
+  "maxLeverage": 25,
+  "markPx": "1777.3",
+  "oraclePx": "1792.2"
+ },
+ "SOL": {
+  "asset": 0,
+  "szDecimals": 2,
+  "maxLeverage": 10,
+  "markPx": "73.65",
+  "oraclePx": "74.18"
+ }
+}
