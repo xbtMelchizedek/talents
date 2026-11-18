@@ -15,7 +15,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-from .units import notional_e8, to_e8
+from .units import MAX_BPS, deviation_bps, notional_e8, to_e8
 
 ALLOWED_NETWORKS_M1 = {"hl-testnet", "hyperevm-testnet", "solana-devnet", "flop-devnet", "flop-testnet",
                        "kalshi-demo", "local"}
@@ -118,7 +118,7 @@ def check_hl_order(m: Mandate, day: DayState, *, coin: str, is_buy: bool, px: st
         v.deny(f"order notional {n} > per-order cap {m.per_order_usd_e8} (USD e8)")
     if not reduce_only and day.used_e8 + n > m.daily_usd_e8:
         v.deny(f"daily new-risk cap: {day.used_e8} + {n} > {m.daily_usd_e8} (USD e8)")
-    dev = abs(px_e8 - mark_e8) * 10_000 // mark_e8
+    dev = deviation_bps(px_e8, mark_e8)
     if dev > m.max_px_deviation_bps:
         v.deny(f"limit price {dev} bps from mark > {m.max_px_deviation_bps} bps")
     return v
@@ -154,7 +154,7 @@ def check_pump_intent(m: Mandate, *, action: str, mint: str, sol_in: str, quoted
         v.deny(f"SOL in {sol_e8} > cap {m.pump_max_sol_in_e8} (e8)")
     if q_e8 <= 0 or min_e8 <= 0 or min_e8 > q_e8:
         return v.deny("need 0 < min_out <= quoted_out")
-    slip = (q_e8 - min_e8) * 10_000 // q_e8
+    slip = (q_e8 - min_e8) * MAX_BPS // q_e8
     if slip > m.pump_max_slippage_bps:
         v.deny(f"slippage tolerance {slip} bps > {m.pump_max_slippage_bps} bps")
     return v

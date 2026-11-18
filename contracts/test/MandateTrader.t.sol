@@ -155,4 +155,37 @@ contract MandateTraderTest is Test {
         }
         assertLe(sent, 1_000e8);
     }
+
+    /// spentOnDay + remainingToday always equals the daily cap after any accepted new-risk order.
+    function test_spentAndRemainingConserveDailyCap() public {
+        assertEq(mt.remainingToday(), 1_000e8);
+        assertEq(mt.spentOnDay(block.timestamp / 1 days), 0);
+        _order(); // $192
+        uint256 day = block.timestamp / 1 days;
+        assertEq(mt.spentOnDay(day) + mt.remainingToday(), 1_000e8);
+        assertEq(mt.spentOnDay(day), 192e8);
+        // reduce-only must not move the budget
+        vm.prank(agent);
+        mt.placeLimitOrder(BTC, false, 63_000e8, 300_000, true, 3, 0);
+        assertEq(mt.spentOnDay(day) + mt.remainingToday(), 1_000e8);
+        assertEq(mt.spentOnDay(day), 192e8);
+    }
+
+    /// An in-band, under-cap order still fails when paused or expired — composition, not just unit caps.
+    function test_inBandUnderCapStillRespectsPauseAndExpiry() public {
+        vm.prank(guardian);
+        mt.pause();
+        vm.prank(agent);
+        vm.expectRevert(MandateTrader.IsPaused.selector);
+        mt.placeLimitOrder(BTC, true, 64_000e8, 300_000, false, 2, 0);
+        assertEq(mt.spentOnDay(block.timestamp / 1 days), 0);
+
+        vm.prank(owner);
+        mt.unpause();
+        vm.warp(mt.expiry());
+        vm.prank(agent);
+        vm.expectRevert(MandateTrader.Expired.selector);
+        mt.placeLimitOrder(BTC, true, 64_000e8, 300_000, false, 2, 0);
+        assertEq(cw.count(), 0);
+    }
 }

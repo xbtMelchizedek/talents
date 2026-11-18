@@ -6,13 +6,24 @@ interface IERC20Min {
     function transferFrom(address from, address to, uint256 amount) external returns (bool);
 }
 
-/// @title HashLockEscrow: the HyperEVM leg of a FLOP <-> HYPE/USDC atomic swap. No bridge.
+/// @title HashLockEscrow — HyperEVM leg of a FLOP <-> HYPE/USDC hash-lock swap. No bridge.
 /// @notice One lock per id. The payee claims with a 32-byte preimage whose sha256 equals `statement`
-///         (the same rule as tclk's hash lock and pearl-diver's prl-htlc, so a preimage that opens one
-///         leg opens the other). The payer refunds at or after `refundAfter` (unix seconds).
-///         Claim is not allowed at or after `refundAfter`, so the two paths never overlap.
+///         (same rule as tclk and pearl-diver). The payer refunds at or after `refundAfter`.
+///         Claim is refused at or after `refundAfter`, so the two paths never overlap.
 ///         Unaudited. Testnet / local only.
 contract HashLockEscrow {
+    error AlreadyExists();
+    error BadTerms();
+    error NotLocked();
+    error TooLate();
+    error TooEarly();
+    error BadPreimage();
+    error TransferFailed();
+
+    event Locked(bytes32 indexed id, address indexed payer, address indexed payee, address token, uint256 amount, bytes32 statement, uint96 refundAfter);
+    event Claimed(bytes32 indexed id, bytes32 preimage);
+    event Refunded(bytes32 indexed id);
+
     enum Status { None, Locked, Claimed, Refunded }
 
     struct Lock {
@@ -26,18 +37,6 @@ contract HashLockEscrow {
     }
 
     mapping(bytes32 => Lock) public locks;
-
-    event Locked(bytes32 indexed id, address indexed payer, address indexed payee, address token, uint256 amount, bytes32 statement, uint96 refundAfter);
-    event Claimed(bytes32 indexed id, bytes32 preimage);
-    event Refunded(bytes32 indexed id);
-
-    error AlreadyExists();
-    error BadTerms();
-    error NotLocked();
-    error TooLate();
-    error TooEarly();
-    error BadPreimage();
-    error TransferFailed();
 
     /// @notice The id commits to every term, so nobody can squat an id with different terms.
     function lockId(address payer, address payee, address token, uint256 amount, bytes32 statement, uint96 refundAfter)
