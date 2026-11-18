@@ -132,4 +132,34 @@ contract HashLockEscrowTest is Test {
         vm.expectRevert(HashLockEscrow.BadPreimage.selector);
         esc.claim(id, guess);
     }
+
+    /// A preimage that correctly opens lock B must not open lock A (valid piece, wrong id).
+    function test_validPreimageOpensOnlyItsOwnLock() public {
+        bytes32 secretB = keccak256("other-secret");
+        bytes32 statementB = sha256(abi.encodePacked(secretB));
+        bytes32 idA = _lockNative(1 ether);
+        vm.prank(bob);
+        bytes32 idB = esc.lock{value: 2 ether}(alice, address(0), 2 ether, statementB, deadline);
+        vm.expectRevert(HashLockEscrow.BadPreimage.selector);
+        esc.claim(idA, secretB);
+        vm.expectRevert(HashLockEscrow.BadPreimage.selector);
+        esc.claim(idB, secret);
+        esc.claim(idA, secret);
+        (,,,,,, HashLockEscrow.Status sa) = esc.locks(idA);
+        (,,,,,, HashLockEscrow.Status sb) = esc.locks(idB);
+        assertEq(uint8(sa), uint8(HashLockEscrow.Status.Claimed));
+        assertEq(uint8(sb), uint8(HashLockEscrow.Status.Locked));
+        assertEq(alice.balance, 1 ether);
+    }
+
+    /// sha256 is the statement rule; a keccak256 digest of the same preimage is a different lock and will not open it.
+    function test_keccakDigestIsNotTheStatement() public {
+        assertTrue(sha256(abi.encodePacked(secret)) != keccak256(abi.encodePacked(secret)));
+        bytes32 id = _lockNative(1 ether);
+        // "guess" that is the keccak of the secret, not the secret itself
+        vm.expectRevert(HashLockEscrow.BadPreimage.selector);
+        esc.claim(id, keccak256(abi.encodePacked(secret)));
+        (,,,,,, HashLockEscrow.Status s) = esc.locks(id);
+        assertEq(uint8(s), uint8(HashLockEscrow.Status.Locked));
+    }
 }

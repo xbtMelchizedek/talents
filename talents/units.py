@@ -4,6 +4,7 @@ from __future__ import annotations
 from decimal import Decimal, InvalidOperation
 
 SCALE = 10**8
+MAX_BPS = 10_000
 
 
 def to_e8(x: str | int | Decimal) -> int:
@@ -28,4 +29,12 @@ def from_e8(n: int) -> str:
 
 
 def notional_e8(px_e8: int, sz_e8: int) -> int:
+    """USD notional at 1e8, truncated toward zero. Same formula as MandateTrader.sol."""
     return px_e8 * sz_e8 // SCALE
+
+
+def deviation_bps(px_e8: int, mark_e8: int) -> int:
+    """Absolute distance from mark, in basis points, truncated toward zero."""
+    if mark_e8 <= 0:
+        raise ValueError("mark must be positive")
+    return abs(px_e8 - mark_e8) * MAX_BPS // mark_e8
