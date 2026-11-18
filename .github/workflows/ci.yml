@@ -1,15 +1,39 @@
 name: ci
 on: [push, pull_request]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  test:
+  contracts:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: contracts
     steps:
       - uses: actions/checkout@v4
       - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+      # New test code is formatted; older files are left alone until they are next touched.
+      - run: forge fmt --check test/invariant test/fuzz test/utils
+      - run: forge build --sizes
+      # Unit, fuzz (10k runs) and invariant (1k runs x depth 64, fail_on_revert) suites.
+      - run: forge test -vvv
+        env:
+          FOUNDRY_PROFILE: ci
+
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install pytest cryptography web3
-      - run: cd contracts && forge test
       - run: python -m pytest -q
       - run: python scripts/secret_scan.py
