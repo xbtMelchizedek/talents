@@ -23,6 +23,8 @@ contract MandateTrader {
     error ReduceOnlyMode();
     error OracleBand();
     error OracleUnavailable();
+    error ZeroAddress();
+    error BadRule();
 
     event MandateSet(address trader, address guardian, uint64 expiry, uint64 dailyNotionalCap, bool reduceOnlyMode);
     event RuleSet(uint32 indexed asset, AssetRule rule);
@@ -31,6 +33,9 @@ contract MandateTrader {
     event OrderSent(uint32 indexed asset, bool isBuy, uint64 limitPx, uint64 sz, bool reduceOnly, uint8 tif, uint128 cloid, uint256 notional);
     event CancelSent(uint32 indexed asset, uint64 oid);
     event OwnerActionSent(uint24 indexed actionId);
+    event OwnershipHandoverStarted(address indexed owner, address indexed pending);
+    event OwnershipHandoverCanceled(address indexed owner, address indexed pending);
+    event OwnershipTransferred(address indexed previous, address indexed next);
 
     ICoreWriter public constant CORE_WRITER = ICoreWriter(0x3333333333333333333333333333333333333333);
     address public constant ORACLE_PX = 0x0000000000000000000000000000000000000807;
@@ -48,10 +53,14 @@ contract MandateTrader {
     }
 
     address public owner;
+    address public pendingOwner;
     address public trader;
     address public guardian;
     uint64 public expiry; // unix seconds; orders refused at or after
-    uint64 public dailyNotionalCap; // USD * 1e8, new-risk orders only
+    /// @dev The cap resets at 00:00 UTC (`block.timestamp / 1 days`). It is per calendar day, not per
+    ///      rolling 24 h: up to 2x the cap can be placed in the minutes either side of midnight UTC.
+    ///      Size the cap with that in mind.
+    uint64 public dailyNotionalCap; // USD * 1e8, new-risk orders only, per UTC calendar day
     bool public paused;
     bool public reduceOnlyMode;
 
@@ -64,7 +73,9 @@ contract MandateTrader {
     }
 
     constructor(address owner_) {
+        if (owner_ == address(0)) revert ZeroAddress();
         owner = owner_;
+        emit OwnershipTransferred(address(0), owner_);
     }
 
     // ---------------- owner ----------------
@@ -81,6 +92,7 @@ contract MandateTrader {
     }
 
     function setRule(uint32 asset, AssetRule calldata rule) external onlyOwner {
+        if (rule.maxOracleDeviationBps > MAX_BPS) revert BadRule();
         rules[asset] = rule;
         emit RuleSet(asset, rule);
     }
@@ -96,7 +108,24 @@ contract MandateTrader {
         emit OwnerActionSent(actionId);
     }
 
+    /// @notice Two steps: the owner names `next`, then `next` calls `acceptOwnership`.
+    ///         A typo can't lose the role, because a wrong address never accepts.
     function transferOwnership(address next) external onlyOwner {
+        if (next == address(0)) revert ZeroAddress();
+        pendingOwner = next;
+        emit OwnershipHandoverStarted(owner, next);
+    }
+
+    function cancelOwnershipHandover() external onlyOwner {
+        emit OwnershipHandoverCanceled(owner, pendingOwner);
+        delete pendingOwner;
+    }
+
+    function acceptOwnership() external {
+        address next = pendingOwner;
+        if (msg.sender != next || next == address(0)) revert NotOwner();
+        delete pendingOwner;
+        emit OwnershipTransferred(owner, next);
         owner = next;
     }
 
@@ -146,6 +175,7 @@ contract MandateTrader {
 
     // ---------------- views ----------------
 
+    /// @notice Cap left for the current UTC calendar day (see `dailyNotionalCap`).
     function remainingToday() external view returns (uint256) {
         uint256 spent = spentOnDay[block.timestamp / 1 days];
         return spent >= dailyNotionalCap ? 0 : dailyNotionalCap - spent;

@@ -4,13 +4,15 @@ pragma solidity ^0.8.26;
 interface IERC20Min {
     function transfer(address to, uint256 amount) external returns (bool);
     function transferFrom(address from, address to, uint256 amount) external returns (bool);
+    function balanceOf(address who) external view returns (uint256);
 }
 
 /// @title HashLockEscrow — HyperEVM leg of a FLOP <-> HYPE/USDC hash-lock swap. No bridge.
 /// @notice One lock per id. The payee claims with a 32-byte preimage whose sha256 equals `statement`
 ///         (same rule as tclk and pearl-diver). The payer refunds at or after `refundAfter`.
 ///         Claim is refused at or after `refundAfter`, so the two paths never overlap.
-///         Unaudited. Testnet / local only.
+///         Tokens must move exactly `amount`: `lock` measures what arrived and refuses fee-on-transfer
+///         tokens. Rebasing tokens are not supported. Unaudited. Testnet / local only.
 contract HashLockEscrow {
     error AlreadyExists();
     error BadTerms();
@@ -51,7 +53,7 @@ contract HashLockEscrow {
         if (payee == address(0) || amount == 0 || refundAfter <= block.timestamp) revert BadTerms();
         if (token == address(0)) {
             if (msg.value != amount) revert BadTerms();
-        } else if (msg.value != 0) {
+        } else if (msg.value != 0 || token.code.length == 0) {
             revert BadTerms();
         }
         id = lockId(msg.sender, payee, token, amount, statement, refundAfter);
@@ -82,9 +84,12 @@ contract HashLockEscrow {
         _pay(l.token, l.payer, l.amount);
     }
 
+    /// @dev Pays out exactly what each lock recorded, so a lock may only record what actually arrived.
     function _pull(address token, address from, uint256 amount) private {
+        uint256 before = IERC20Min(token).balanceOf(address(this));
         (bool ok, bytes memory ret) = token.call(abi.encodeCall(IERC20Min.transferFrom, (from, address(this), amount)));
         if (!ok || (ret.length != 0 && !abi.decode(ret, (bool)))) revert TransferFailed();
+        if (IERC20Min(token).balanceOf(address(this)) - before != amount) revert TransferFailed();
     }
 
     function _pay(address token, address to, uint256 amount) private {

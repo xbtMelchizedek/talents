@@ -26,13 +26,15 @@ HashLockEscrow
 - At any moment exactly one exit is open: claim strictly before `refundAfter`, refund at or after it.
 - The lock id changes if any single term changes.
 - Tokens that return nothing still round-trip; tokens that return `false` cannot lock.
+- A lock records exactly what arrived: fee-on-transfer tokens and token addresses with no code cannot lock (`test/Hardening.t.sol`).
 
 MandateTrader
 - New-risk notional placed on any UTC day never exceeds the daily cap and equals the model's total exactly.
 - `remainingToday()` is always the cap minus today's spend.
 - The contract and the model agree on every order attempt (pause, expiry, allowlist, shape, size, oracle band, cap).
 - Only orders and cancels reach CoreWriter, with header version 1 and action id 1 or 10; nobody but the trader key places orders, and only the owner sends raw actions.
-- The oracle band is inclusive at both edges and closed one unit outside them.
+- The oracle band is inclusive at both edges and closed one unit outside them; `setRule` refuses a band above 100%.
+- Ownership moves in two steps (name, then accept), never to zero (`test/Hardening.t.sol`).
 - Reduce-only orders never draw down the cap; notional equals `limitPx * sz / 1e8`, computed without the full product.
 
 ## Mutation check
