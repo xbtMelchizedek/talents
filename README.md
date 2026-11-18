@@ -20,6 +20,7 @@ Design: [docs/DESIGN.md](docs/DESIGN.md) (facts verified against official docs o
 | `contracts/src/HashLockEscrow.sol` | The HyperEVM leg of a FLOP ⇄ HYPE/USDC hash-lock swap. 32-byte sha256 preimage, the same rule as tclk and [pearl-diver](https://github.com/xbtMelchizedek/pearl-diver). | 11 forge tests incl. fuzz |
 | `talents/mandate.py` | The pre-sign policy engine: HL perps, HIP-4 outcomes, pump.fun buy/sell (never create), swaps. Refuses mainnet networks. | `tests/test_mandate.py` |
 | `talents/hl.py` + `python -m talents preflight` | Testnet-pinned info client, order wire builder (SDK shape), tick/lot rules and builder-fee caps from the docs, preflight against the live testnet mark. Prints the **unsigned** action. | `tests/test_hl.py` (live read-only test behind `TALENTS_LIVE_TESTNET=1`) |
+| `talents/outcomes.py` | HIP-4 outcome markets on testnet: asset ids (`100_000_000 + 10*outcome + side`, from the docs), template parsing, preflight to an unsigned order. | `tests/test_outcomes.py` |
 | `talents/callout.py` | Commit-reveal signed callouts (did:key Ed25519) and an integer-only track record (hidden commits count as losses) that an SP1 program can reproduce. | `vectors/callout-v1.json` golden vectors |
 | `talents/flopsim.py`, `talents/swap.py` | Simulated FLOP hash escrow (pinned to pearl-diver's scenarios) and a swap coordinator; end-to-end on anvil. | `tests/test_swap_anvil.py` |
 

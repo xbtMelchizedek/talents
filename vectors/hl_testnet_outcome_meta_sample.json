@@ -1,0 +1,67 @@
+{
+ "outcomes": [
+  {
+   "outcome": 20115,
+   "name": "template:binaryPriceExternal",
+   "description": "feed:Coinbase Exchange trades API: api.exchange.coinbase.com/products/BTC-USD/trades|instrument:Coinbase Exchange BTC-USD spot pair|priceDescription:USD per BTC spot (latest trade at or before each instant)|seconds:300|shortName:BTC-USD|threshold:100000|time:20261001-1600",
+   "sideSpecs": [
+    {
+     "name": "template:Yes"
+    },
+    {
+     "name": "template:No"
+    }
+   ],
+   "quoteToken": "USDC",
+   "venue": "ao"
+  },
+  {
+   "outcome": 26391,
+   "name": "template:sportsContestParticipant5",
+   "description": "participant:Alav\u00e9s",
+   "sideSpecs": [
+    {
+     "name": "Yes"
+    },
+    {
+     "name": "No"
+    }
+   ],
+   "quoteToken": "USDC",
+   "venue": "flp",
+   "deployerFeeScale": "1.0"
+  },
+  {
+   "outcome": 24274,
+   "name": "template:sportsContestWinner7",
+   "description": "competition:NBA|contestType:game|officialSource:ESPN|participantA:Atlanta Hawks|participantB:Dallas Mavericks|resolutionDeadline:20261017-0600|scheduledStart:20261017-0000|season:2027|shortNameA:Hawks|shortNameB:Mavericks|sport:basketball|stage:Preseason",
+   "sideSpecs": [
+    {
+     "name": "template:{shortNameA}"
+    },
+    {
+     "name": "template:{shortNameB}"
+    }
+   ],
+   "quoteToken": "USDC",
+   "venue": "wren",
+   "deployerFeeScale": "1.0"
+  }
+ ],
+ "questions": [
+  {
+   "question": 1283,
+   "name": "template:sportsContestResult",
+   "description": "competition:Chinese Super Leag|contestType:match|officialSource:cfl-china.cn|participantA:Shanghai Port FC|participantB:Beijing Guoan FC|resolutionDeadline:20260912-1135|scheduledStart:20260905-1135|season:2026|sport:Soccer|stage:Regular Season",
+   "fallbackOutcome": 17207,
+   "namedOutcomes": [
+    17209
+   ],
+   "settledNamedOutcomes": [
+    17208,
+    17210
+   ]
+  }
+ ],
+ "feeScale": "1.0"
+}
