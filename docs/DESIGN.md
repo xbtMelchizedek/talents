@@ -143,6 +143,8 @@ leverage, allowed HL assets, max deviation from mark, reduce-only mode, pump cap
 2. **Venue-native hard limits**: HL sub-account funded to the cap + API wallet + dead-man's-switch cancels; or
    **MandateTrader on HyperEVM** (built): the cap is a contract rule, so even a compromised agent key can't exceed it or
    withdraw. Owner-only `ownerAction` for transfers; guardian (e.g. a Watchman-style monitor) can pause, never unpause.
+   Ownership moves in two steps. The daily cap is per UTC calendar day, not a rolling 24 h, so up to 2x the cap can be
+   placed around midnight UTC; size it with that in mind.
    Solana: the hot wallet only ever holds the pump cap.
 3. **Simulation**: Curve-Lab replays pump transactions on a surfpool fork; HL preflight checks size/tick rules and the
    live mark.
